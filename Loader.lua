@@ -13,7 +13,7 @@ local games = ({
 })[game.PlaceId]
 
 if games then
-    loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Robobo2022/Rework-Hydra/tree/main/Games/" .. games))()
+    loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Robobo2022/Rework-Hydra/main/Games/" .. games))()
 else
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "Hydra Network",
