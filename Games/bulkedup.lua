@@ -38,6 +38,50 @@ Tab:AddToggle({
 	end    
 })
 
+Tab:AddButton({
+	Name = "Get all Trophies",
+	Callback = function()
+        local ohString1 = "NeighborhoodWoods"
+        game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
+        wait(1)
+        local ohString1 = "CircleRoadCenter"
+        game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
+        wait(1)
+        local ohString1 = "LeftUnderCliff"
+        game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
+        wait(1)
+        local ohString1 = "RoadEnd"
+        game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
+        wait(1)
+        local ohString1 = "GreenScreen"
+        game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
+        wait(1)
+        local ohString1 = "Cliff"
+        game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
+        wait(1)
+        local ohString1 = "UnderCounter"
+        game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
+        wait(1)
+        local ohString1 = "House"
+        game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
+        wait(1)
+        local ohString1 = "WoodsCenter"
+        game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
+        wait(1)
+        local ohString1 = "Origin"
+        game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
+        wait(1)
+        local ohString1 = "Cabin"
+        game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
+        wait(1)
+        local ohString1 = "Test"
+        game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
+        wait(1)
+        local ohString1 = "Spawn"
+        game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
+  	end    
+})
+
 local Section = Tab:AddSection({
 	Name = "Local Player"
 })
