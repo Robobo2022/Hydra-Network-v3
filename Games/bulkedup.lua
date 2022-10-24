@@ -1,15 +1,14 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Bulked Up", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Window = OrionLib:MakeWindow({Name = "Bulked Up", HidePremium = true, IntroText = "Hydra Network", IntroIcon = "rbxassetid://10993876141", SaveConfig = true, ConfigFolder = "OrionTest"})
 getgenv().autoGems = true
 getgenv().unRagdoll = true
 getgenv().autocandy = true
 
 local Tab = Window:MakeTab({
 	Name = "Main",
-	Icon = "rbxassetid://4483345998",
+	Icon = "rbxassetid://7539983773",
 	PremiumOnly = false
 })
-
 
 local Section = Tab:AddSection({
 	Name = "Auto"
