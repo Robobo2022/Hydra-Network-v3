@@ -9,7 +9,7 @@ end
 getgenv().Network = true
 
 local games = ({
-    [4483381587] = "Baseplate.lua",
+    [4483381587] = "baseplate.lua",
 })[game.PlaceId]
 
 if games then
