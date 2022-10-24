@@ -88,7 +88,7 @@ local Section = Tab:AddSection({
 
 Tab:AddSlider({
 	Name = "Speed Speed",
-	Min = 0,
+	Min = 16,
 	Max = 500,
 	Default = 16,
 	Color = Color3.fromRGB(255,255,255),
