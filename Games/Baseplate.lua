@@ -1,1 +1,0 @@
-print("omg crazy script")
