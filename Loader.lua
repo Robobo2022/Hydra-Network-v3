@@ -7,3 +7,16 @@ if getgenv().Network then
 end
 
 getgenv().Network = true
+
+local games = ({
+    [4483381587] = "Baseplate.lua",
+})[game.PlaceId]
+
+if games then
+    loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Robobo2022/Rework-Hydra/tree/main/Games/" .. game))()
+else
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Hydra Network",
+        Text = "Hydra Network does not support this game"
+    })
+end
