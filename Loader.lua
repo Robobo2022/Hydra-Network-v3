@@ -9,7 +9,6 @@ end
 getgenv().Network = true
 
 local games = ({
-    [4483381587] = "baseplate.lua",
     [6847090259] = "bulkedup.lua",
 })[game.PlaceId]
 
