@@ -25,18 +25,18 @@ local Toggle = Tab:CreateToggle({
 })
 
 local Toggle = Tab:CreateToggle({
-	Name = "Auto unragdoll",
+	Name = "Auto Pickup Bomb",
 	CurrentValue = false,
 	Callback = function(Value)
-        Unragdoll = Value
+        AutoBomb = Value
 	end,
 })
 
 local Toggle = Tab:CreateToggle({
-	Name = "Auto Bomb",
+	Name = "Auto unragdoll",
 	CurrentValue = false,
 	Callback = function(Value)
-        AutoBomb = Value
+        Unragdoll = Value
 	end,
 })
 
@@ -164,7 +164,7 @@ task.spawn(function()
         if getgenv().AutoMeteor then
             for i,v in pairs(workspace:GetChildren()) do
                 if v:IsA("Part") and v.Name == "RootPart" then
-                    v.CFrame = Char.HumanoidRootPart.CFrame
+                    Char.HumanoidRootPart.CFrame = v.CFrame
                 end
             end
         end
