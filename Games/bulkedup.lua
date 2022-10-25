@@ -4,6 +4,9 @@ local Tab = Window:CreateTab("Main")
 getgenv().autoGems = true
 getgenv().unRagdoll = true
 getgenv().autocandy = true
+getgenv().removefence = true
+getgenv().AutoMeteor = true
+getgenv().AutoBomb = true
 
 local Toggle = Tab:CreateToggle({
 	Name = "Auto Pickup Gems",
@@ -14,18 +17,34 @@ local Toggle = Tab:CreateToggle({
 })
 
 local Toggle = Tab:CreateToggle({
-	Name = "Auto Pickup Gems",
+	Name = "Auto Pickup candy",
 	CurrentValue = false,
 	Callback = function(Value)
-        autocandy= Value
+        autocandy = Value
 	end,
 })
 
 local Toggle = Tab:CreateToggle({
-	Name = "Auto unRagdoll",
+	Name = "Auto unragdoll",
 	CurrentValue = false,
 	Callback = function(Value)
         Unragdoll = Value
+	end,
+})
+
+local Toggle = Tab:CreateToggle({
+	Name = "Auto Bomb",
+	CurrentValue = false,
+	Callback = function(Value)
+        AutoBomb = Value
+	end,
+})
+
+local Toggle = Tab:CreateToggle({
+	Name = "Auto Meteor",
+	CurrentValue = false,
+	Callback = function(Value)
+        AutoMeteor = Value
 	end,
 })
 
@@ -106,9 +125,45 @@ local Backpack = Plr.Backpack;
 
 task.spawn(function()
     while task.wait(0.1) do
+        if getgenv().removefence then
+            for i,v in pairs(workspace:GetChildren()) do
+                if v:IsA("Folder") and v.Name == "Laser Fence" then
+                    v:Destroy()
+                end
+            end
+        end
+    end
+end)
+
+task.spawn(function()
+    while task.wait(0.1) do
         if getgenv().autoGems then
             for i,v in pairs(workspace:GetChildren()) do
                 if v:IsA("Part") and v.Name == "Gem" then
+                    v.CFrame = Char.HumanoidRootPart.CFrame
+                end
+            end
+        end
+    end
+end)
+
+task.spawn(function()
+    while task.wait(0.1) do
+        if getgenv().AutoBomb then
+            for i,v in pairs(workspace:GetChildren()) do
+                if v:IsA("Part") and v.Name == "GrenadePickup" or v.Name == "Sticky BombPickup" or v.Name == "Stun GrenadePickup" or v.Name == "Plasma GrenadePickup" or v.Name == "Black Hole GrenadePickup" then
+                    v.CFrame = Char.HumanoidRootPart.CFrame
+                end
+            end
+        end
+    end
+end)
+
+task.spawn(function()
+    while task.wait(0.1) do
+        if getgenv().AutoMeteor then
+            for i,v in pairs(workspace:GetChildren()) do
+                if v:IsA("Part") and v.Name == "RootPart" then
                     v.CFrame = Char.HumanoidRootPart.CFrame
                 end
             end
