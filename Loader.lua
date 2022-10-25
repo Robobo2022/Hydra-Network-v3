@@ -1,6 +1,16 @@
+local ownerId = game.CreatorId
+game.Players.PlayerAdded:Connect(function(player)
+    if player.UserId == ownerId then
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "Hydra Network",
+            Text = "Owner joined! be careful with what you do."
+        })
+    end
+end)
+
 if getgenv().Network then
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "HydraNetwork",
+        Title = "Hydra Network",
         Text = "Hydra Network has already been executed in this game"
     })
     return
@@ -10,6 +20,7 @@ getgenv().Network = true
 
 local games = ({
     [6847090259] = "bulkedup.lua",
+    [155615604] = "prisonlife.lua",
 })[game.PlaceId]
 
 if games then
