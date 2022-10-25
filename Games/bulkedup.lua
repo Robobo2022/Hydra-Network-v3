@@ -1,45 +1,36 @@
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Bulked Up", HidePremium = true, IntroText = "Hydra Network", IntroIcon = "rbxassetid://10993876141", SaveConfig = true, ConfigFolder = "OrionTest"})
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+local Window = Rayfield:CreateWindow({Name = "Bulked up"})
+local Tab = Window:CreateTab("Main")
 getgenv().autoGems = true
 getgenv().unRagdoll = true
 getgenv().autocandy = true
 
-local Tab = Window:MakeTab({
-	Name = "Main",
-	Icon = "rbxassetid://7539983773",
-	PremiumOnly = false
-})
-
-local Section = Tab:AddSection({
-	Name = "Auto"
-})
-
-Tab:AddToggle({
+local Toggle = Tab:CreateToggle({
 	Name = "Auto Pickup Gems",
-	Default = false,
+	CurrentValue = false,
 	Callback = function(Value)
         autoGems = Value
-	end    
+	end,
 })
 
-Tab:AddToggle({
-	Name = "Auto Pickup Candy",
-	Default = false,
+local Toggle = Tab:CreateToggle({
+	Name = "Auto Pickup Gems",
+	CurrentValue = false,
 	Callback = function(Value)
         autocandy= Value
-	end    
+	end,
 })
 
-Tab:AddToggle({
-	Name = "Auto Unragdoll",
-	Default = false,
+local Toggle = Tab:CreateToggle({
+	Name = "Auto unRagdoll",
+	CurrentValue = false,
 	Callback = function(Value)
         Unragdoll = Value
-	end    
+	end,
 })
 
-Tab:AddButton({
-	Name = "Get all Trophies",
+local Button = Tab:CreateButton({
+	Name = "Get all trophies",
 	Callback = function()
         local ohString1 = "NeighborhoodWoods"
         game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
@@ -79,35 +70,31 @@ Tab:AddButton({
         wait(1)
         local ohString1 = "Spawn"
         game:GetService("ReplicatedStorage").Events.TrophyPickup:FireServer(ohString1)
-  	end    
+	end,
 })
 
-local Section = Tab:AddSection({
-	Name = "Local Player"
-})
+local Section = Tab:CreateSection("Local Player")
 
-Tab:AddSlider({
-	Name = "Speed Speed",
-	Min = 16,
-	Max = 500,
-	Default = 16,
-	Color = Color3.fromRGB(255,255,255),
+local Slider = Tab:CreateSlider({
+	Name = "Walk Speed",
+	Range = {16, 500},
 	Increment = 1,
+	Suffix = "WalkSpeed",
+	CurrentValue = 16,
 	Callback = function(WalkSpeed)
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = WalkSpeed
-	end   
+	end,
 })
 
-Tab:AddSlider({
+local Slider = Tab:CreateSlider({
 	Name = "Jump Power",
-	Min = 0,
-	Max = 500,
-	Default = 16,
-	Color = Color3.fromRGB(255,255,255),
+	Range = {50, 500},
 	Increment = 1,
+	Suffix = "JumpPower",
+	CurrentValue = 50,
 	Callback = function(JumpPower)
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = JumpPower
-	end   
+	end,
 })
 
 local Players = game:GetService("Players");
