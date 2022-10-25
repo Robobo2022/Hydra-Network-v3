@@ -7,7 +7,7 @@ local T1 = Window:CreateTab("Credits")
 getgenv().autoGems = false
 getgenv().unRagdoll = false
 getgenv().autocandy = false
-getgenv().removefence = false
+getgenv().removefence = true
 getgenv().AutoBomb = false
 getgenv().meteors = false
 
