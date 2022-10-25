@@ -6,6 +6,7 @@ getgenv().unRagdoll = true
 getgenv().autocandy = true
 getgenv().removefence = true
 getgenv().AutoBomb = true
+getgenv().meteors = false
 
 local Toggle = Tab:CreateToggle({
 	Name = "Auto Pickup Gems",
@@ -28,6 +29,14 @@ local Toggle = Tab:CreateToggle({
 	CurrentValue = false,
 	Callback = function(Value)
         AutoBomb = Value
+	end,
+})
+
+local Toggle = Tab:CreateToggle({
+	Name = "Auto Farm Meteor",
+	CurrentValue = false,
+	Callback = function(Value)
+        meteors = Value
 	end,
 })
 
@@ -152,18 +161,6 @@ end)
 
 task.spawn(function()
     while task.wait(0.1) do
-        if getgenv().AutoMeteor then
-            for i,v in pairs(workspace:GetChildren()) do
-                if v:IsA("Part") and v.Name == "RootPart" then
-                    Char.HumanoidRootPart.CFrame = v.CFrame.new()
-                end
-            end
-        end
-    end
-end)
-
-task.spawn(function()
-    while task.wait(0.1) do
         if getgenv().autocandy then
             for i,v in pairs(workspace:GetChildren()) do
                 if v:IsA("Part") and v.Name == "Candy" then
@@ -178,6 +175,19 @@ task.spawn(function()
     while task.wait(0.1) do
         if getgenv().unRagdoll then
             replicated.Events.unRagdoll:FireServer(Char)
+        end
+    end
+end)
+
+task.spawn(function()
+    while task.wait(0.1) do
+        if getgenv().meteors then
+            for i,v in pairs(workspace.Meteorites:GetDescendants()) do
+                if v:IsA("Part") and v.Name == "RootPart" then
+                    Char.HumanoidRootPart.CFrame = v.CFrame
+                    vim:SendMouseButtonEvent(4, 1, 0, true, game, 1);
+                end
+            end
         end
     end
 end)
