@@ -4,11 +4,11 @@ local Window = Rayfield:CreateWindow({Name = "Bulked up"})
 local Tab = Window:CreateTab("Main")
 local T1 = Window:CreateTab("Credits")
 
-getgenv().autoGems = true
-getgenv().unRagdoll = true
-getgenv().autocandy = true
-getgenv().removefence = true
-getgenv().AutoBomb = true
+getgenv().autoGems = false
+getgenv().unRagdoll = false
+getgenv().autocandy = false
+getgenv().removefence = false
+getgenv().AutoBomb = false
 getgenv().meteors = false
 
 local Paragraph = T1:CreateParagraph({Title = "Developers", Content = "hydra#8270"})
