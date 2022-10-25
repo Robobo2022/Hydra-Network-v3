@@ -15,7 +15,7 @@ local Window = Rayfield:CreateWindow({
     KeySettings = {
         Title = "Hydra Network",
         Subtitle = "Key System",
-        Note = "Get Key (https://link-hub.net/488828/key-for-hydra-network)",
+        Note = "get key -> shorturl.at/bfyFR",
         Key = "test"
     }
 })
