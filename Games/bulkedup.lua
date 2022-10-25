@@ -1,12 +1,17 @@
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 local Window = Rayfield:CreateWindow({Name = "Bulked up"})
+
 local Tab = Window:CreateTab("Main")
+local T1 = Window:CreateTab("Credits")
+
 getgenv().autoGems = true
 getgenv().unRagdoll = true
 getgenv().autocandy = true
 getgenv().removefence = true
 getgenv().AutoBomb = true
 getgenv().meteors = false
+
+local Paragraph = T1:CreateParagraph({Title = "Developers", Content = "hydra#8270"})
 
 local Toggle = Tab:CreateToggle({
 	Name = "Auto Pickup Gems",
@@ -25,7 +30,7 @@ local Toggle = Tab:CreateToggle({
 })
 
 local Toggle = Tab:CreateToggle({
-	Name = "Auto Pickup Bomb",
+	Name = "Auto Pickup Bombs",
 	CurrentValue = false,
 	Callback = function(Value)
         AutoBomb = Value
@@ -33,7 +38,7 @@ local Toggle = Tab:CreateToggle({
 })
 
 local Toggle = Tab:CreateToggle({
-	Name = "Auto Farm Meteor",
+	Name = "Auto Farm Meteor (need to equip something that does damage)",
 	CurrentValue = false,
 	Callback = function(Value)
         meteors = Value
@@ -117,11 +122,10 @@ local Slider = Tab:CreateSlider({
 })
 
 local Players = game:GetService("Players");
-local vim = game:GetService("VirtualInputManager");
+local hit = game:GetService("VirtualInputManager");
 local replicated = game:GetService("ReplicatedStorage")
 local Plr = Players.LocalPlayer;
 local Char = Plr.Character or Plr.CharacterAdded:Wait();
-local Backpack = Plr.Backpack;
 
 task.spawn(function()
     while task.wait(0.1) do
@@ -137,7 +141,7 @@ end)
 
 task.spawn(function()
     while task.wait(0.1) do
-        if getgenv().autoGems then
+        if getgenv().autoGems == true then
             for i,v in pairs(workspace:GetChildren()) do
                 if v:IsA("Part") and v.Name == "Gem" then
                     v.CFrame = Char.HumanoidRootPart.CFrame
@@ -149,7 +153,7 @@ end)
 
 task.spawn(function()
     while task.wait(0.1) do
-        if getgenv().AutoBomb then
+        if getgenv().AutoBomb == true then
             for i,v in pairs(workspace:GetChildren()) do
                 if v:IsA("Part") and v.Name == "GrenadePickup" or v.Name == "Sticky BombPickup" or v.Name == "Stun GrenadePickup" or v.Name == "Plasma GrenadePickup" or v.Name == "Black Hole GrenadePickup" then
                     v.CFrame = Char.HumanoidRootPart.CFrame
@@ -161,7 +165,7 @@ end)
 
 task.spawn(function()
     while task.wait(0.1) do
-        if getgenv().autocandy then
+        if getgenv().autocandy == true then
             for i,v in pairs(workspace:GetChildren()) do
                 if v:IsA("Part") and v.Name == "Candy" then
                     v.CFrame = Char.HumanoidRootPart.CFrame
@@ -173,7 +177,7 @@ end)
 
 task.spawn(function()
     while task.wait(0.1) do
-        if getgenv().unRagdoll then
+        if getgenv().unRagdoll == true then
             replicated.Events.unRagdoll:FireServer(Char)
         end
     end
@@ -181,11 +185,11 @@ end)
 
 task.spawn(function()
     while task.wait(0.1) do
-        if getgenv().meteors then
+        if getgenv().meteors == true then
             for i,v in pairs(workspace.Meteorites:GetDescendants()) do
                 if v:IsA("Part") and v.Name == "RootPart" then
                     Char.HumanoidRootPart.CFrame = v.CFrame
-                    vim:SendMouseButtonEvent(4, 1, 0, true, game, 1);
+                    hit:SendMouseButtonEvent(4, 1, 0, true, game, 1);
                 end
             end
         end
