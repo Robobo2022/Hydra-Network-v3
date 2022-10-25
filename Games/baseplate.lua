@@ -1,5 +1,16 @@
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
-local Window = Rayfield:CreateWindow({Name = "Baseplate"})
+local Window = Rayfield:CreateWindow({
+    Name = "Baseplate",
+    LoadingTitle = "Hydra network",
+    LoadingSubtitle = "by hydra#8270",
+    KeySystem = false,
+    KeySettings = {
+        Title = "Hydra Network",
+        Subtitle = "Key System",
+        Note = "Get Key (https://link-hub.net/488828/key-for-hydra-network)",
+        Key = "test"
+    }
+})
 local Tab = Window:CreateTab("Main")
 
 local player = game:GetService("Players").LocalPlayer
