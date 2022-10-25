@@ -1,8 +1,18 @@
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
-local Window = Rayfield:CreateWindow({Name = "Bulked up"})
+local Window = Rayfield:CreateWindow({
+    Name = "Bulked up",
+    LoadingTitle = "Hydra network",
+    LoadingSubtitle = "by hydra#8270",
+    KeySystem = false,
+    KeySettings = {
+        Title = "Sirius Hub",
+        Subtitle = "Key System",
+        Note = "Join the discord (discord.gg/sirius)",
+        Key = "ABCDEF"
+    }
+    })
 
 local Tab = Window:CreateTab("Main")
-local T1 = Window:CreateTab("Credits")
 
 getgenv().autoGems = false
 getgenv().unRagdoll = false
@@ -10,8 +20,6 @@ getgenv().autocandy = false
 getgenv().removefence = true
 getgenv().AutoBomb = false
 getgenv().meteors = false
-
-local Paragraph = T1:CreateParagraph({Title = "Developers", Content = "hydra#8270"})
 
 local Toggle = Tab:CreateToggle({
 	Name = "Auto Pickup Gems",
