@@ -18,7 +18,7 @@ local Window = Rayfield:CreateWindow({
         Note = "Get Key (https://link-hub.net/488828/key-for-hydra-network)",
         Key = "test"
     }
-    })
+})
 
 local Tab = Window:CreateTab("Main")
 local player = game:GetService("Players").LocalPlayer
