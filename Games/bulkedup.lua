@@ -5,7 +5,6 @@ getgenv().autoGems = true
 getgenv().unRagdoll = true
 getgenv().autocandy = true
 getgenv().removefence = true
-getgenv().AutoMeteor = true
 getgenv().AutoBomb = true
 
 local Toggle = Tab:CreateToggle({
@@ -37,14 +36,6 @@ local Toggle = Tab:CreateToggle({
 	CurrentValue = false,
 	Callback = function(Value)
         Unragdoll = Value
-	end,
-})
-
-local Toggle = Tab:CreateToggle({
-	Name = "Auto Meteor",
-	CurrentValue = false,
-	Callback = function(Value)
-        AutoMeteor = Value
 	end,
 })
 
@@ -164,7 +155,7 @@ task.spawn(function()
         if getgenv().AutoMeteor then
             for i,v in pairs(workspace:GetChildren()) do
                 if v:IsA("Part") and v.Name == "RootPart" then
-                    Char.HumanoidRootPart.CFrame = v.CFrame
+                    Char.HumanoidRootPart.CFrame = v.CFrame.new()
                 end
             end
         end
