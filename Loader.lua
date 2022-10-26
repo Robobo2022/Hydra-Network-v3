@@ -1,6 +1,6 @@
 getgenv().Check1 = true
 getgenv().Check2 = true
-
+ 
 
 if firetouchinterest then
     Check1 = true
