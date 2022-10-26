@@ -39,7 +39,6 @@ local Window = Rayfield:CreateWindow({
 })
 local T1 = Window:CreateTab("Function Checker")
 
-
 if Check1 == true then
     local Paragraph = T1:CreateParagraph({Title = "firetouchinterest", Content = "Supported"})
 else
