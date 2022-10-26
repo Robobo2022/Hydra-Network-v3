@@ -1,6 +1,7 @@
 getgenv().Check1 = true
 getgenv().Check2 = true
 
+
 if firetouchinterest then
     Check1 = true
 else
@@ -21,7 +22,7 @@ if getgenv().Network then
     return
 end
 
-setclipboard("")
+setclipboard("https://link-hub.net/488828/key-for-hydra-network")
 
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 local Window = Rayfield:CreateWindow({
@@ -36,7 +37,6 @@ local Window = Rayfield:CreateWindow({
         Key = "test"
     }
 })
-
 local T1 = Window:CreateTab("Function Checker")
 
 
@@ -53,7 +53,7 @@ else
 end
 
 if Check1 and Check2 == true then
-    Rayfield:Notify("Executor Supported!","You can now explain without any problems",10010348543)
+    Rayfield:Notify("Executor Supported!","You can now exploit without any problems",10010348543)
 else
     Rayfield:Notify("Executor Unsupported","Your executor is not fully Supported so there might be some problems",10010348543)
 end
