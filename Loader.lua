@@ -1,6 +1,16 @@
 getgenv().Check1 = true
 getgenv().Check2 = true
 
+local ownerId = game.CreatorId
+game.Players.PlayerAdded:Connect(function(player)
+    if player.UserId == ownerId then
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "Hydra Network",
+            Text = "Owner joined! be careful with what you do."
+        })
+    end
+end)
+
 if firetouchinterest then
     Check1 = true
 else
@@ -61,15 +71,6 @@ wait(10)
 Rayfield:Destroy()
 
 getgenv().Network = true
-local ownerId = game.CreatorId
-game.Players.PlayerAdded:Connect(function(player)
-    if player.UserId == ownerId then
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "Hydra Network",
-            Text = "Owner joined! be careful with what you do."
-        })
-    end
-end)
 
 local games = ({
     [6847090259] = "bulkedup.lua",
