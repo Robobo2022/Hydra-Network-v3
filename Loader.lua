@@ -22,7 +22,7 @@ if getgenv().Network then
     return
 end
 
-setclipboard("https://link-hub.net/488828/key-for-hydra-network")
+setclipboard("")
 
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 local Window = Rayfield:CreateWindow({
