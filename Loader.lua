@@ -30,6 +30,7 @@ local Paragraph = Tab:CreateParagraph({Title = "Player id", Content = player.Use
 local Paragraph = Tab:CreateParagraph({Title = "Executor", Content = identifyexecutor().."."})
 local Paragraph = Tab:CreateParagraph({Title = "Game", Content = game.PlaceId.."."})
 local Paragraph = Tab:CreateParagraph({Title = "Script loading!", Content = "Hydra network is now loading the script."})
+
 wait(4)
 
 getgenv().Network = true
