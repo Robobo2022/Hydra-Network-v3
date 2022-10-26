@@ -1,93 +1,91 @@
 local Light = game:GetService("Lighting")
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Prison life", HidePremium = true, IntroText = "Hydra Network", IntroIcon = "rbxassetid://10993876141", SaveConfig = true, ConfigFolder = "OrionTest"})
-
-local MainTab = Window:MakeTab({
-	Name = "Main",
-	Icon = "rbxassetid://7539983773",
-	PremiumOnly = false
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+local Window = Rayfield:CreateWindow({
+    Name = "Prison life",
+    LoadingTitle = "Hydra network",
+    LoadingSubtitle = "by hydra#8270",
+    KeySystem = false,
+    KeySettings = {
+        Title = "Hydra Network",
+        Subtitle = "Key System",
+        Note = "get key",
+        Key = "test"
+    }
 })
 
-local PlayerTab = Window:MakeTab({
-	Name = "Player",
-	Icon = "rbxassetid://2795572800",
-	PremiumOnly = false
-})
+local T1 = Window:CreateTab("Main")
+local T2 = Window:CreateTab("Player")
 
-MainTab:AddDropdown({
-	Name = "Gun",
-	Default = "Choose Weapon",
+local Dropdown = T1:CreateDropdown({
+	Name = "Gun spawn",
 	Options = {"M9", "AK-47", "M4A1", "Remington 870"},
+	CurrentOption = "",
 	Callback = function(Value)
-		game.Workspace.Remote.ItemHandler:InvokeServer(workspace.Prison_ITEMS.giver[Value].ITEMPICKUP)
-	end    
+        game.Workspace.Remote.ItemHandler:InvokeServer(workspace.Prison_ITEMS.giver[Value].ITEMPICKUP)
+	end,
 })
 
-MainTab:AddDropdown({
-	Name = "Melee",
-	Default = "Choose Weapon",
+local Dropdown = T1:CreateDropdown({
+	Name = "Melee spawn",
 	Options = {"Hammer", "Crude Knife"},
+	CurrentOption = "",
 	Callback = function(Value)
 		local args = {
 			[1] = workspace.Prison_ITEMS.single[Value].ITEMPICKUP}
 		workspace.Remote.ItemHandler:InvokeServer(unpack(args))
-	end    
+	end,
 })
 
-local Section = MainTab:AddSection({
-	Name = "Weapon Mod"
-})
+local Section = T1:CreateSection("Weapon mods")
 
-MainTab:AddButton({
+local Button = T1:CreateButton({
 	Name = "Mod M9",
 	Callback = function()
-		s = game:GetService("Players").LocalPlayer.Backpack.M9.GunStates
+        s = game:GetService("Players").LocalPlayer.Backpack.M9.GunStates
 		rs = require(s)
 		rs.CurrentAmmo = math.huge
 		rs.MaxAmmo = math.huge
 		rs.ReloadTime = 0
-  	end    
+	end,
 })
 
-MainTab:AddButton({
+local Button = T1:CreateButton({
 	Name = "Mod Ak-47",
 	Callback = function()
-		s = game:GetService("Players").LocalPlayer.Backpack["AK-47"].GunStates
+        s = game:GetService("Players").LocalPlayer.Backpack["AK-47"].GunStates
 		rs = require(s)
 		rs.CurrentAmmo = math.huge
 		rs.MaxAmmo = math.huge
 		rs.ReloadTime = 0
-  	end    
+	end,
 })
 
-MainTab:AddButton({
+local Button = T1:CreateButton({
 	Name = "Mod Remington 870",
 	Callback = function()
-		s = game:GetService("Players").LocalPlayer.Backpack["Remington 870"].GunStates
+        s = game:GetService("Players").LocalPlayer.Backpack["Remington 870"].GunStates
 		rs = require(s)
 		rs.CurrentAmmo = math.huge
 		rs.MaxAmmo = math.huge
 		rs.ReloadTime = 0
-  	end    
+	end,
 })
 
-MainTab:AddButton({
+local Button = T1:CreateButton({
 	Name = "Mod M4A1",
 	Callback = function()
-		s = game:GetService("Players").LocalPlayer.Backpack.M4A1.GunStates
+        s = game:GetService("Players").LocalPlayer.Backpack.M4A1.GunStates
 		rs = require(s)
 		rs.CurrentAmmo = math.huge
 		rs.MaxAmmo = math.huge
 		rs.ReloadTime = 0
-  	end    
+	end,
 })
 
-local Section = MainTab:AddSection({
-	Name = "Other"
-})
+local Section = T1:CreateSection("Other")
 
-MainTab:AddButton({
-	Name = "Full Bright",
+local Button = T1:CreateButton({
+	Name = "Fullbright",
 	Callback = function()
         Light.Ambient = Color3.new(1, 1, 1)
         Light.ColorShift_Bottom = Color3.new(1, 1, 1)
@@ -97,19 +95,18 @@ MainTab:AddButton({
         game.Lighting.ClockTime = 14
         game.Lighting.Brightness = 10
         game.Lighting.GlobalShadows = false
-  	end    
+	end,
 })
-local speedslider = PlayerTab:AddSlider({
-	Name = "Speed",
-	Min = 16,
-	Max = 500,
-	Default = 16,
-	Color = Color3.fromRGB(137, 207, 240),
+
+local speedslider = T2:CreateSlider({
+	Name = "Change WalkSpeed",
+	Range = {16, 500},
 	Increment = 1,
-	ValueName = "Walk Speed",
+	Suffix = "WalkSpeed",
+	CurrentValue = 16,
 	Callback = function(WalkSpeed)
-		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = WalkSpeed
-	end   
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = WalkSpeed
+	end,
 })
 
 task.spawn(function()
@@ -120,17 +117,15 @@ task.spawn(function()
 	end
 end)
 
-local jumpslider = PlayerTab:AddSlider({
-	Name = "Jump Power",
-	Min = 50,
-	Max = 500,
-	Default = 50.145,
-	Color = Color3.fromRGB(137, 207, 240),
+local jumpslider = T2:CreateSlider({
+	Name = "Change JumpPower",
+	Range = {50, 500},
 	Increment = 1,
-	ValueName = "Jump Power",
-	Callback = function(JumpPower)
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = JumpPower
-    end
+	Suffix = "JumpPower",
+	CurrentValue = 50,
+	Callback = function(jumppower)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = jumppower
+	end,
 })
 
 task.spawn(function()
@@ -141,53 +136,27 @@ task.spawn(function()
 	end
 end)
 
-local hipheightslider = PlayerTab:AddSlider({
-	Name = "Hip Height",
-	Min = 0,
-	Max = 500,
-	Default = 0,
-	Color = Color3.fromRGB(137, 207, 240),
+local fovslider = T2:CreateSlider({
+	Name = "Change Fov",
+	Range = {70, 120},
 	Increment = 1,
-	ValueName = "Hip Height",
-	Callback = function(JumpHeight)
-        game.Players.LocalPlayer.Character.Humanoid.HipHeight = JumpHeight
-    end
-})
-
-task.spawn(function()
-	while task.wait(0.1) do
-		if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
-			hipheightslider:Set(0)
-		end
-	end
-end)
-
-PlayerTab:AddSlider({
-	Name = "Fov Slider",
-	Min = 1,
-	Max = 120,
-	Default = 70,
-	Color = Color3.fromRGB(137, 207, 240),
-	Increment = 1,
-	ValueName = "Fov",
+	Suffix = "Fov",
+	CurrentValue = 70,
 	Callback = function(Fov)
         game:GetService'Workspace'.Camera.FieldOfView = Fov
-    end
+	end,
 })
 
-local gravityslider = PlayerTab:AddSlider({
-	Name = "Gravity",
-	Min = 0,
-	Max = 196.2,
-	Default = 196.2,
-	Color = Color3.fromRGB(137, 207, 240),
+local gravityslider = T2:CreateSlider({
+	Name = "Change Gravity",
+	Range = {0, 196.2},
 	Increment = 1,
-	ValueName = "Gravity",
+	Suffix = "Gravity",
+	CurrentValue = 196.2,
 	Callback = function(Gravity)
         Workspace.Gravity = Gravity
-    end
+	end,
 })
-
 
 task.spawn(function()
 	while task.wait(0.1) do
