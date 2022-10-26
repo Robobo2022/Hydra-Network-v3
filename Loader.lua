@@ -22,8 +22,6 @@ local Window = Rayfield:CreateWindow({
     }
 })
 
-
-
 Rayfield:Destroy()
 
 getgenv().Network = true
