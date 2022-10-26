@@ -1,3 +1,18 @@
+getgenv().Check1 = true
+getgenv().Check2 = true
+
+if firetouchinterest then
+    Check1 = true
+else
+    Check1 = false
+end
+
+if require then
+    Check2 = true
+else
+    Check2 = false
+end
+
 if getgenv().Network then
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "Hydra Network",
@@ -21,7 +36,22 @@ local Window = Rayfield:CreateWindow({
         Key = "test"
     }
 })
+local T1 = Window:CreateTab("Function Checker")
 
+
+if Check1 == true then
+    local Paragraph = T1:CreateParagraph({Title = "firetouchinterest", Content = "Supported"})
+else
+    local Paragraph = T1:CreateParagraph({Title = "firetouchinterest", Content = "Unsupported"})
+end
+
+if Check2 == true then
+    local Paragraph = T1:CreateParagraph({Title = "require", Content = "Supported"})
+else
+    local Paragraph = T1:CreateParagraph({Title = "require", Content = "Unsupported"})
+end
+
+wait(10)
 Rayfield:Destroy()
 
 getgenv().Network = true
