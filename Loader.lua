@@ -22,7 +22,7 @@ if getgenv().Network then
     return
 end
 
-setclipboard("")
+setclipboard("test")
 
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 local Window = Rayfield:CreateWindow({
