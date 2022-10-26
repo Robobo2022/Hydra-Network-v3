@@ -47,6 +47,7 @@ local games = ({
     [6847090259] = "bulkedup.lua",
     [155615604] = "prisonlife.lua",
     [4483381587] = "baseplate.lua",
+    [10243982775] = "redbox.lua",
 })[game.PlaceId]
 
 if games then
