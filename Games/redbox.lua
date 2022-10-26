@@ -5,7 +5,7 @@ local players = game.Players:GetPlayers()
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
 local Window = Rayfield:CreateWindow({
-    Name = "Redbox 2",
+    Name = "Redbox",
     LoadingTitle = "Hydra network",
     LoadingSubtitle = "by hydra#8270",
     KeySystem = false,
