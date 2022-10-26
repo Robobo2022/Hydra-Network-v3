@@ -6,6 +6,8 @@ if getgenv().Network then
     return
 end
 
+setclipboard("https://link-hub.net/488828/key-for-hydra-network")
+
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 local Window = Rayfield:CreateWindow({
     Name = "Key System Succes!",
@@ -15,7 +17,7 @@ local Window = Rayfield:CreateWindow({
     KeySettings = {
         Title = "Hydra Network",
         Subtitle = "Key System",
-        Note = "get key -> shorturl.at/bfyFR",
+        Note = "Key link Copied in clipboard",
         Key = "test"
     }
 })
@@ -27,7 +29,7 @@ local Paragraph = Tab:CreateParagraph({Title = "Name", Content = player.Name..".
 local Paragraph = Tab:CreateParagraph({Title = "Player id", Content = player.UserId.."."})
 local Paragraph = Tab:CreateParagraph({Title = "Executor", Content = identifyexecutor().."."})
 local Paragraph = Tab:CreateParagraph({Title = "Game", Content = game.PlaceId.."."})
-wait(10)
+wait(2)
 
 getgenv().Network = true
 local ownerId = game.CreatorId
