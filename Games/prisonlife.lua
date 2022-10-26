@@ -1,5 +1,14 @@
+
 local Light = game:GetService("Lighting")
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+
+if supexe == false then
+	Rayfield:Notify("Unsupported","Sorry your Executor is not supported",10010348543)
+	wait(5)
+	Rayfield:Destroy()
+end
+
+
 local Window = Rayfield:CreateWindow({
     Name = "Prison life",
     LoadingTitle = "Hydra network",
