@@ -51,6 +51,12 @@ else
     local Paragraph = T1:CreateParagraph({Title = "require", Content = "Unsupported"})
 end
 
+if Check1 and Check2 == true then
+    Rayfield:Notify("Executor Supported!","You can now explain without any problems",10010348543)
+else
+    Rayfield:Notify("Executor Unsupported","Your executor is not fully Supported so there might be some problems",10010348543)
+end
+
 wait(10)
 Rayfield:Destroy()
 
