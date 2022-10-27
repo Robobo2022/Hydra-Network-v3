@@ -1,7 +1,7 @@
 getgenv().Check1 = true
 getgenv().Check2 = true
 getgenv().supexe = true
- 
+
 
 if firetouchinterest then
     Check1 = true
