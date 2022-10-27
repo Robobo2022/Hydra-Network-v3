@@ -1,6 +1,6 @@
 getgenv().Check1 = true
 getgenv().Check2 = true
-getgenv().supexe = false
+getgenv().supexe = true
  
 
 if firetouchinterest then
@@ -54,7 +54,7 @@ end
 
 if Check1 and Check2 == true then
     Rayfield:Notify("Executor Supported!","You can now exploit without any problems",10010348543)
-    supexe = false
+    supexe = true
 else
     Rayfield:Notify("Executor Unsupported","Your executor is not fully Supported so there might be some issues",10010348543)
     supexe = false
