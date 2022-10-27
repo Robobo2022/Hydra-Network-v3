@@ -1,6 +1,6 @@
 getgenv().Check1 = true
 getgenv().Check2 = true
-getgenv().supexe = true
+getgenv().supexe = false
  
 
 if firetouchinterest then
@@ -54,7 +54,7 @@ end
 
 if Check1 and Check2 == true then
     Rayfield:Notify("Executor Supported!","You can now exploit without any problems",10010348543)
-    supexe = true
+    supexe = false
 else
     Rayfield:Notify("Executor Unsupported","Your executor is not fully Supported so there might be some issues",10010348543)
     supexe = false
@@ -83,7 +83,7 @@ local games = ({
 
 if games then
     Rayfield:Destroy()
-    loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Robobo2022/Rework-Hydra/main/Games/" .. games))()
+    loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Robobo2022/Hydra-Network-V3/main/Games/" .. games))()
 else
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "Hydra Network",
