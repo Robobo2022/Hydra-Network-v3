@@ -689,3 +689,5 @@ game:GetService("RunService").RenderStepped:Connect(function()
         end
     end)
 end)
+
+Rayfield:LoadConfiguration()
