@@ -10,7 +10,7 @@ local Window = Rayfield:CreateWindow({
         Note = "Join the discord (discord.gg/sirius)",
         Key = "ABCDEF"
     }
-    })
+})
 
 local Tab = Window:CreateTab("Main")
 
