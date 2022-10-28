@@ -1,5 +1,11 @@
-# Rework-Hydra
+# Hydra network v3
 
-Rework-Hydra is a rework version of Hydra network the nam Rework-Hydra is just a holder name its probably going to change to v3
+The official Hydra network v3 Github repository
 
-its going to have more features and better features, and more games!
+```lua
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Robobo2022/Hydra-Network-v3/main/Loader.lua"), true))()
+```
+
+The script is in early acces to this isnt the finished product
+
+Hydra network v3 is a rework of the old script Hydra network v2, Hydra network v3 is going to have more features and more games supported
