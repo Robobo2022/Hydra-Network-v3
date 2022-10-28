@@ -1,11 +1,3 @@
-getgenv().Check = false
-
-if require then
-    Check = false
-else
-    Check = false
-end
-
 local StarterPlayer = game:GetService("StarterPlayer")
 local Workspace = game:GetService("Workspace")
 local Light = game:GetService("Lighting")
@@ -24,10 +16,6 @@ local Window = Rayfield:CreateWindow({
         Key = "ABCDEF"
     }
 })
-
-if Check == false then
-    Rayfield:Notify("Unsupported","Your executor is not supported, some feature are now disabled",10010348543)
-end
 
 getgenv().Color = BrickColor
 getgenv().HeadSize = 1
@@ -86,34 +74,32 @@ end)
 local T1 = Window:CreateTab("Main")
 local T2 = Window:CreateTab("Player")
 
-if Check == true then
-    local Keybind = T1:CreateKeybind({
-        Name = "Inf ammo(equipe Weapon before pressing)",
-        CurrentKeybind = "R",
-        HoldToInteract = false,
-        Callback = function(Keybind)
-            local Tool = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool")
-            local m = require(Tool.toolSettings)
-            game:GetService("Players").LocalPlayer.Character.Humanoid:UnequipTools()
-            game:GetService("Players").LocalPlayer.Character.Humanoid:EquipTool(Tool)
-            game:GetService("ReplicatedStorage").Assets.Remotes.syncAmmo:FireServer(1000000,1000000, Tool)
-        end,
-    })
-end
+local Keybind = T1:CreateKeybind({
+    Name = "Inf ammo(equipe Weapon before pressing)",
+    CurrentKeybind = "R",
+    HoldToInteract = false,
+    Callback = function(Keybind)
+        local Tool = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool")
+        local m = require(Tool.toolSettings)
+        game:GetService("Players").LocalPlayer.Character.Humanoid:UnequipTools()
+        game:GetService("Players").LocalPlayer.Character.Humanoid:EquipTool(Tool)
+        game:GetService("ReplicatedStorage").Assets.Remotes.syncAmmo:FireServer(1000000,1000000, Tool)
+    end,
+})
 
 
-if Check == true then
-    local Keybind = T1:CreateKeybind({
-        Name = "No Recoil",
-        CurrentKeybind = "L",
-        HoldToInteract = false,
-        Callback = function(Keybind)
-            local Tool = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool")
-            local m = require(Tool.toolSettings)
-            m.firingRecoilEnabled = false
-        end,
-    })
-end
+
+local Keybind = T1:CreateKeybind({
+    Name = "No Recoil",
+    CurrentKeybind = "L",
+    HoldToInteract = false,
+    Callback = function(Keybind)
+        local Tool = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool")
+        local m = require(Tool.toolSettings)
+        m.firingRecoilEnabled = false
+    end,
+})
+
 
 local Button = T2:CreateButton({
 	Name = "Fullbright",
