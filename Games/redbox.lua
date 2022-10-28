@@ -28,6 +28,7 @@ local Window = Rayfield:CreateWindow({
 if Check == false then
     Rayfield:Notify("Unsupported","Your executor is not supported, some feature are now disabled",10010348543)
 end
+
 getgenv().Color = BrickColor
 getgenv().HeadSize = 1
 getgenv().Rootpart = 2
