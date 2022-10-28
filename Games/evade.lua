@@ -29,7 +29,6 @@ getgenv().revivedie = false
 getgenv().autowistle = false
 getgenv().autochat = false
 getgenv().AutoDrink = false
-getgenv().NoCameraShake = false
 getgenv().Settings = {
     moneyfarm = false,
     afkfarm = false,
@@ -116,14 +115,6 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-    while task.wait(0.1) do
-        if NoCameraShake == true then
-            localplayer.PlayerScripts.CameraShake.Value = CFrame.new(0,0,0) * CFrame.new(0,0,0)
-        end
-    end
-end)
-
-task.spawn(function()
     while task.wait(6) do
         if AutoDrink == true then
             local ohString1 = "Cola"
@@ -149,6 +140,16 @@ task.spawn(function()
         local ohString1 = "Free money <font color=\"rgb(100,255,100)\">($99999)</font>"
         game:GetService("Players").LocalPlayer.PlayerGui.HUD.Messages.Use:Fire(ohString1)
        end 
+    end
+end)
+
+task.spawn(function()
+    while task.wait(1) do
+        if autochat == true then
+            local ohString1 = "Hydra Network on top"
+            local ohString2 = "All"
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(ohString1, ohString2)
+        end
     end
 end)
 
@@ -257,7 +258,7 @@ local Toggle = T1:CreateToggle({
 	CurrentValue = false,
 	Flag = "Toggle1",
 	Callback = function(Value)
-        NoCameraShake = Value
+        settings.NoCameraShake = Value
 	end,
 })
 
@@ -502,6 +503,8 @@ local Button = T2:CreateButton({
 	end,
 })
 
+
+
 local Button = T3:CreateButton({
 	Name = "Ticket Esp",
 	Callback = function()
@@ -562,7 +565,7 @@ local Button = T2:CreateButton({
 	end,
 })
 
-local Button = T2:CreateButton({
+local Button = T5:CreateButton({
 	Name = "Free Cam (shift + P)",
 	Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Robobo2022/script/main/Freecam.lua"))()
@@ -640,6 +643,39 @@ local Button = T4:CreateButton({
         TeleportService:Teleport(GameId, game.Players.LocalPlayer)
 	end,
 })
+
+local Button = T5:CreateButton({
+	Name = "Spawm chat",
+	Callback = function(Value)
+        autochat = Value
+	end,
+})
+
+
+local Keybind = T5:CreateKeybind({
+	Name = "Random emote",
+	CurrentKeybind = "Z",
+	HoldToInteract = false,
+	Flag = "Keybind1",
+	Callback = function(Keybind)
+        local number = math.random(4)
+        local ohString1 = (number)
+        game:GetService("ReplicatedStorage").Events.Emote:FireServer(ohString1)
+	end,
+})
+
+local Keybind = T5:CreateKeybind({
+	Name = "Random Vote",
+	CurrentKeybind = "X",
+	HoldToInteract = false,
+	Flag = "Keybind1",
+	Callback = function(Keybind)
+        local RandomVote = math.random(4)
+        local ohNumber1 = (RandomVote)
+        game:GetService("ReplicatedStorage").Events.Vote:FireServer(ohNumber1)
+	end,
+})
+
 
 local Paragraph = T7:CreateParagraph({Title = "Owner/Main Dev", Content = "hydra#8270"})
 local Paragraph = T7:CreateParagraph({Title = "Credits", Content = "FeIix and ss.spooky.ss"})
