@@ -462,7 +462,7 @@ local Button = T2:CreateButton({
 })
 
 local Keybind = T2:CreateKeybind({
-	Name = "Keybind Example",
+	Name = "keybind to teleport",
 	CurrentKeybind = "Q",
 	HoldToInteract = false,
 	Flag = "Keybind1",
