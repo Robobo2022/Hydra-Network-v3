@@ -258,7 +258,7 @@ local Toggle = T1:CreateToggle({
 	CurrentValue = false,
 	Flag = "Toggle1",
 	Callback = function(Value)
-        settings.NoCameraShake = Value
+        Settings.NoCameraShake = Value
 	end,
 })
 
@@ -463,19 +463,19 @@ local Button = T2:CreateButton({
 	end,
 })
 
-local Keybind = T2:CreateKeybind({
-	Name = "keybind to teleport",
-	CurrentKeybind = "Q",
-	HoldToInteract = false,
-	Flag = "Keybind1",
-	Callback = function(Keybind)
+
+local Button = T2:CreateButton({
+	Name = "T to teleport",
+	Callback = function()
         plr = game.Players.LocalPlayer 
         hum = plr.Character.HumanoidRootPart 
         mouse = plr:GetMouse()
         mouse.KeyDown:connect(function(key)
+            if key == "c" then
             if mouse.Target then
                 hum.CFrame = CFrame.new(mouse.Hit.x, mouse.Hit.y + 5, mouse.Hit.z)
                 end
+            end
         end)
 	end,
 })
