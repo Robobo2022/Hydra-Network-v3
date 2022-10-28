@@ -197,7 +197,7 @@ task.spawn(function()
             for i,v in pairs(workspace.Meteorites:GetDescendants()) do
                 if v:IsA("Part") and v.Name == "RootPart" then
                     Char.HumanoidRootPart.CFrame = v.CFrame
-                    hit:SendMouseButtonEvent(4, 1, 0, true, game, 1);
+                    hit:SendMouseButtonEvent(4, 1, 0, true, game, 1)
                 end
             end
         end
