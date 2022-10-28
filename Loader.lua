@@ -32,7 +32,7 @@ local Window = Rayfield:CreateWindow({
     KeySettings = {
         Title = "Hydra Network",
         Subtitle = "Key System",
-        Note = "Key link Copied in clipboard",
+        Note = "Key Copied in clipboard",
         Key = "test"
     }
 })
