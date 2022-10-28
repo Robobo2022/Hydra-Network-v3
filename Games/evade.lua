@@ -501,7 +501,7 @@ local Button = T2:CreateButton({
 	end,
 })
 
-local Button = T2:CreateButton({
+local Button = T3:CreateButton({
 	Name = "Ticket Esp",
 	Callback = function()
         while true do
