@@ -45,7 +45,7 @@ end
 if Check1 == true then
     Rayfield:Notify("Executor Supported!","You can now exploit without any problems",10010348543)
 else
-    Rayfield:Notify("Executor Unsupported","Your executor is not fully Supported so there might be some issues",10010348543)
+    Rayfield:Notify("Executor Unsupported","Your executor is not fully Supported so some games are disabled",10010348543)
 end
 
 wait(10)
