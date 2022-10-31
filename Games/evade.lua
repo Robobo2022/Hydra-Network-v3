@@ -1,3 +1,4 @@
+getgenv().SecureMode = true
 game:GetService("ReplicatedStorage").Events.Respawn:FireServer()
 wait(1)
 local WorkspacePlayers = game:GetService("Workspace").Game.Players
