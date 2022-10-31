@@ -39,13 +39,375 @@ getgenv().Settings = {
     TicketFarm = false,
 }
 
-local FindAI = function()
-    for _,v in pairs(WorkspacePlayers:GetChildren()) do
-        if not Players:FindFirstChild(v.Name) then
-            return v
+
+
+local TyphFun = {
+    ["Objects"] = {},
+    ["Functions"] = {},
+    ["Settings"] = {
+        OutlineColor = Color3.new(0,0,0),
+        AccentColor = Color3.new(255, 255, 255),
+        TextColor = Color3.new(255, 255, 255),
+        TeamMateColor = Color3.new(0, 255, 0),
+        EnemyColor = Color3.new(255, 0, 0),
+        MonsterColor = Color3.new(255, 0, 0),
+        TeamCheck = false,
+        Distance = 1000,
+        Enabled = true,
+        BoxNHealth = false,
+        LookLine = false,
+        Line = false,
+        Name = true,
+        Dist = false,
+        Tool = true,
+    },
+    ["Services"] = {
+        ["RunService"] = game:GetService("RunService"),
+        ["Players"] = game:GetService("Players"),
+        ["Workspace"] = game:GetService("Workspace"),
+        ["CoreGui"] = game:GetService("CoreGui"),
+        ["LocalPlayer"] = game:GetService("Players").LocalPlayer,
+        ["Camera"] = game:GetService("Workspace").CurrentCamera,
+        ["ViewPort"] = workspace.CurrentCamera.ViewportSize,
+        ["WorldToViewportPoint"] = game:GetService("Workspace").CurrentCamera.worldToViewportPoint,
+    },
+    ["ChangeableFunctions"] = {},
+}
+
+local Services = TyphFun.Services
+local Objects = TyphFun.Objects
+local Settings = TyphFun.Settings
+local Functions = TyphFun.Functions
+local Startup = TyphFun.ChangeableFunctions
+local lplr = Services.LocalPlayer
+local SCREEN_SIZE = Services.ViewPort
+
+local temptable = Drawing.new("Text")
+temptable.Text = "Typh.Fun ESP"
+temptable.Visible = true
+temptable.Position = Vector2.new(math.floor(SCREEN_SIZE.x / 16),math.floor(SCREEN_SIZE.y / 16))
+temptable.Size = 13
+temptable.Center = true
+temptable.Color = Color3.fromRGB(142, 19, 192)
+temptable.Transparency = 1
+temptable.Outline = true
+temptable.OutlineColor = Color3.fromRGB(142, 19, 192)
+
+--EDITABLE FUNCTIONS
+TyphFun.Functions.ValidChar = function(v)
+    if v ~= nil and v:FindFirstChild("Humanoid") ~= nil and v:FindFirstChild("HumanoidRootPart") ~= nil and v.Humanoid.Health > 0 and v.HumanoidRootPart ~= nil and lplr.Character ~= nil and lplr.Character ~= v then
+        return true
+    else
+        return false
+    end
+end
+
+TyphFun.Functions.GetPlayerFromCharacter = function(v)
+    for i, plr in pairs(game.Players:GetPlayers()) do
+        if plr.Character ~= nil and plr.Character == v then
+            return true, plr
         end
     end
 end
+
+TyphFun.Functions.GetTeam = function(v)
+    local _, plr = TyphFun.Functions.GetPlayerFromCharacter(v)
+    if plr.TeamColor == lplr.TeamColor then
+        return true
+    else
+        return false
+    end
+end
+--EDITABLE FUNCTIONS
+
+TyphFun.Functions.RemoveAllDrawings = function()
+    for i, v in pairs(TyphFun.Objects) do
+        v:Remove()
+    end
+    TyphFun.Objects = {}
+end
+
+TyphFun.Functions.BoxESP = function(v, BoxT, HealthT, NameT, DistT, ToolT, LineT, LookLineT)
+    local camera = game:GetService("Workspace").CurrentCamera
+    local CurrentCamera = workspace.CurrentCamera
+    local worldToViewportPoint = CurrentCamera.worldToViewportPoint
+    local HeadOff = Vector3.new(0, 0.5, 0)
+    local LegOff = Vector3.new(0,3,0)
+    local BoxOutline = Drawing.new("Square")
+    BoxOutline.Visible = false
+    BoxOutline.Color = Settings["OutlineColor"]
+    BoxOutline.Thickness = 3
+    BoxOutline.Transparency = 1
+    BoxOutline.Filled = false
+
+    local Box = Drawing.new("Square")
+    Box.Visible = false
+    Box.Color = Settings["AccentColor"]
+    Box.Thickness = 1
+    Box.Transparency = 1
+    Box.Filled = false
+
+    local HealthBarOutline = Drawing.new("Square")
+    HealthBarOutline.Thickness = 3
+    HealthBarOutline.Filled = false
+    HealthBarOutline.Color = Settings["OutlineColor"]
+    HealthBarOutline.Transparency = 1
+    HealthBarOutline.Visible = false
+
+    local HealthBar = Drawing.new("Square")
+    HealthBar.Thickness = 1
+    HealthBar.Filled = false
+    HealthBar.Transparency = 1
+    HealthBar.Visible = false
+
+    local Name = Drawing.new("Text")
+    Name.Color = Settings["TextColor"]
+    Name.Outline = true
+    Name.Center = true
+    Name.Size = 13
+    Name.Font = 2
+
+    local Misc = Drawing.new("Text")
+    Misc.Color = Settings["TextColor"]
+    Misc.Outline = true
+    Misc.Center = true
+    Misc.Size = 13
+    Misc.Font = 2
+    
+    local Misc2 = Drawing.new("Text")
+    Misc2.Color = Settings["TextColor"]
+    Misc2.Outline = true
+    Misc2.Center = true
+    Misc2.Size = 13
+    Misc2.Font = 2
+
+    local LookLine = Drawing.new("Line")
+    LookLine.Visible = true
+    LookLine.Color = Settings["AccentColor"]
+    LookLine.Thickness = 2
+    LookLine.Transparency = 1  
+
+    local Line = Drawing.new("Line")
+    Line.Visible = true
+    Line.Color = Settings["AccentColor"]
+    Line.Thickness = 2
+    Line.Transparency = 1
+    
+    TyphFun.Objects[v.Name] = {
+        BoxOutline,
+        Box,
+        HealthBarOutline,
+        HealthBar,
+        Name,
+        Misc,
+        Misc2,
+        LookLine,
+        Line,
+    }
+
+    local function boxesp()
+        TyphFun.Services.RunService.RenderStepped:Connect(function()
+            if TyphFun.Functions.ValidChar(v) and v.HumanoidRootPart then
+                local Vector, onScreen = camera:worldToViewportPoint(v.HumanoidRootPart.Position)
+                local Character = v
+                local RootPart = v.HumanoidRootPart
+                local hum = v.Humanoid
+                local RootPosition = worldToViewportPoint(CurrentCamera, RootPart.Position)
+                local HeadPosition = worldToViewportPoint(CurrentCamera, RootPart.Position + HeadOff)
+                local LegPosition = worldToViewportPoint(CurrentCamera, RootPart.Position - LegOff)
+                local Center = Vector2.new(workspace.CurrentCamera.ViewportSize.X / 2, workspace.CurrentCamera.ViewportSize.Y / 2)
+                local Size = (camera:WorldToViewportPoint(RootPart.Position - Vector3.new(0, 3, 0)).Y - camera:WorldToViewportPoint(RootPart.Position + Vector3.new(0, 2.6, 0)).Y) / 2
+                local BoxSize = Vector2.new(math.floor(Size * 1.5), math.floor(Size * 1.9))
+                local BoxPos = Vector2.new(math.floor(Vector.X - Size * 1.5 / 2), math.floor(Vector.Y - Size * 1.6 / 2))
+                local BottomOffset = BoxSize.Y + BoxPos.Y + 10
+                
+                Misc.Color = Settings["TextColor"]
+                Misc2.Color = Settings["TextColor"]
+                Name.Color = Settings["TextColor"]
+                HealthBarOutline.Color = Settings["OutlineColor"]
+                Box.Color = Settings["AccentColor"]
+                BoxOutline.Color = Settings["OutlineColor"]
+
+                if onScreen and (RootPart.Position - camera.CFrame.Position).Magnitude < Settings["Distance"] then
+                    BoxOutline.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    BoxOutline.Position = Vector2.new(RootPosition.X - BoxOutline.Size.X / 2, RootPosition.Y - BoxOutline.Size.Y / 2)
+
+
+                    Box.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+                    Box.Position = Vector2.new(RootPosition.X - Box.Size.X / 2, RootPosition.Y - Box.Size.Y / 2)
+
+
+                    HealthBarOutline.Size = Vector2.new(2, HeadPosition.Y - LegPosition.Y)
+                    HealthBarOutline.Position = BoxOutline.Position - Vector2.new(6,0)
+
+
+                    HealthBar.Size = Vector2.new(2, (HeadPosition.Y - LegPosition.Y) / (hum["MaxHealth"] / math.clamp(hum["Health"], 0, hum["MaxHealth"])))
+                    HealthBar.Position = Vector2.new(Box.Position.X - 6, Box.Position.Y + (1 / HealthBar.Size.Y))
+                    HealthBar.Color = Color3.fromRGB(255 - 255 / (hum["MaxHealth"] / hum["Health"]), 255 / (hum["MaxHealth"] / hum["Health"]), 0)
+
+
+                    Name.Position = Vector2.new(BoxSize.X / 2 + BoxPos.X, BoxPos.Y - 40)
+
+                    Line.From = Center
+                    Line.To = Vector2.new(RootPosition.X, RootPosition.Y)
+                    
+                    if v:FindFirstChild("Head") then
+                        local Head = v.Head
+                        local LineOff = Head.CFrame * Vector3.new(0,0,-3)
+                        local HeadPosition2 = worldToViewportPoint(CurrentCamera, LineOff)
+                        local HeadPosition3 = worldToViewportPoint(CurrentCamera, Head.Position)
+                        LookLine.From = Vector2.new(HeadPosition3.X,HeadPosition3.Y)
+                        LookLine.To = Vector2.new(HeadPosition2.X,HeadPosition2.Y)
+                    else
+                        LookLine.Visible = false
+                    end
+
+                    local PlayerExists, Player = TyphFun.Functions.GetPlayerFromCharacter(v)
+                    
+                    if PlayerExists and Player.name == Player.DisplayName then
+                        Name.Text = tostring(Player.name)
+                    elseif PlayerExists and Player.name ~= Player.DisplayName then
+                        Name.Text = tostring(Player.DisplayName) .. " (@" .. tostring(Player.name) .. ")"
+                    else
+                        Name.Text = tostring(v.name)
+                    end
+
+
+                    Misc.Position = Vector2.new(BoxSize.X / 2 + BoxPos.X, BottomOffset)
+                    Misc.Text = math.floor((RootPart.Position - camera.CFrame.Position).Magnitude) .. "m away"
+
+
+                    Misc2.Position = Vector2.new(BoxSize.X / 2 + BoxPos.X, BottomOffset + 16)
+                    if Character:FindFirstChildOfClass("Tool") then
+                        Misc2.Text = tostring(Character:FindFirstChildOfClass("Tool").Name)
+                    else
+                        Misc2.Text = "None"
+                    end
+
+                    if not BoxT then
+                        BoxOutline.Visible = Box
+                        Box.Visible = Box
+
+                    else
+                        BoxOutline.Visible = Settings["BoxNHealth"]
+                        Box.Visible = Settings["BoxNHealth"]
+                    end
+
+                    if HealthT then
+                        HealthBarOutline.Visible = HealthT
+                        HealthBar.Visible = HealthT
+                    else
+                        HealthBarOutline.Visible = Settings["BoxNHealth"]
+                        HealthBar.Visible = Settings["BoxNHealth"]
+                    end
+
+                    if NameT then
+                        Name.Visible = NameT
+                    else
+                        Name.Visible = Settings["Name"]
+                    end
+
+                    if LookLineT then
+                        LookLine.Visible = LookLineT
+                    else
+                        LookLine.Visible = Settings["LookLine"]
+                    end
+
+                    if DistT then
+                        Misc.Visible = DistT
+                    else
+                        Misc.Visible = Settings["Misc"]
+                    end
+
+                    if ToolT then
+                        Misc2.Visible = ToolT
+                    else
+                        Misc2.Visible = Settings["Misc"]
+                    end
+
+                    if LineT then
+                        Line.Visible = LineT
+                    else
+                        Line.Visible = Settings["Line"]
+                    end
+
+                    local TeamMate;
+
+                    if PlayerExists then
+                        TeamMate = TyphFun.Functions.GetTeam(v)
+                        if PlayerExists and TeamMate and Settings["TeamCheck"]  then
+                            Box.Color = Settings["TeamMateColor"]
+                            Line.Color = Settings["TeamMateColor"]
+                        elseif PlayerExists and not TeamMate and Settings["TeamCheck"] then
+                            Box.Color = Settings["EnemyColor"]
+                            Line.Color = Settings["EnemyColor"]
+                        end
+                    elseif not PlayerExists then
+                        Box.Color = Settings["MonsterColor"]
+                        Line.Color = Settings["MonsterColor"]
+                    end
+
+                    if not Settings["Enabled"] then
+                        BoxOutline.Visible = false
+                        Box.Visible = false
+                        HealthBarOutline.Visible = false
+                        HealthBar.Visible = false
+                        Name.Visible = false
+                        Misc.Visible = false
+                        Misc2.Visible = false
+                        LookLine.Visible = false
+                        Line.Visible = false
+                    end
+                else
+                    BoxOutline.Visible = false
+                    Box.Visible = false
+                    HealthBarOutline.Visible = false
+                    HealthBar.Visible = false
+                    Name.Visible = false
+                    Misc.Visible = false
+                    Misc2.Visible = false
+                    LookLine.Visible = false
+                    Line.Visible = false
+                end
+            else
+                BoxOutline.Visible = false
+                Box.Visible = false
+                HealthBarOutline.Visible = false
+                HealthBar.Visible = false
+                Name.Visible = false
+                Misc.Visible = false
+                Misc2.Visible = false
+                LookLine.Visible = false
+                Line.Visible = false
+            end
+        end)
+    end
+    coroutine.wrap(boxesp)()
+end
+
+TyphFun.Functions.AddObject = function(v, BoxT, HealthT, NameT, DistT, ToolT, LineT, LookLineT)
+    TyphFun.Objects[v.Name] = {}
+    table.insert(TyphFun.Objects, v)
+    TyphFun.Functions.BoxESP(v, BoxT, HealthT, NameT, DistT, ToolT, LineT, LookLineT)
+end
+
+TyphFun.Functions.Startup = function()
+    for i,v in pairs(game:GetService("Workspace").Game.Players:GetChildren()) do
+        TyphFun.Functions.AddObject(v)
+    end
+    
+    game:GetService("Workspace").Game.Players.ChildAdded:Connect(function(v)
+        TyphFun.Functions.AddObject(v)
+    end)
+    game:GetService("Workspace").Game.Players.ChildRemoved:Connect(function()
+        TyphFun.Functions.RemoveAllDrawings()
+        for i,v in pairs(game:GetService("Workspace").Game.Players:GetChildren()) do
+            TyphFun.Functions.AddObject(v)
+        end
+    end)
+end
+
+TyphFun.Functions.Startup()
 
 local GetDownedPlr = function()
     for i,v in pairs(WorkspacePlayers:GetChildren()) do
@@ -361,96 +723,6 @@ local Button = T2:CreateButton({
 	end,
 })
 
-local Button = T3:CreateButton({
-	Name = "Player Esp",
-	Callback = function()
-        local dwEntities = game:GetService("Players")
-        local dwLocalPlayer = dwEntities.LocalPlayer 
-        local dwRunService = game:GetService("RunService")
-        
-        local settings_tbl = {
-            ESP_Enabled = true,
-            ESP_TeamCheck = false,
-            Chams = true,
-            Chams_Color = Color3.fromRGB(255, 255, 255),
-            Chams_Transparency = 0.9,
-            Chams_Glow_Color = Color3.fromRGB(0, 0, 0)
-        }
-        
-        function destroy_chams(char)
-            for k,v in next, char:GetChildren() do 
-                if v:IsA("BasePart") and v.Transparency ~= 1 then
-                    if v:FindFirstChild("Glow") and 
-                    v:FindFirstChild("Chams") then
-                        v.Glow:Destroy()
-                        v.Chams:Destroy() 
-                    end 
-                end 
-            end 
-        end
-        
-        dwRunService.Heartbeat:Connect(function()
-            if settings_tbl.ESP_Enabled then
-                for k,v in next, dwEntities:GetPlayers() do 
-                    if v ~= dwLocalPlayer then
-                        if v.Character and
-                        v.Character:FindFirstChild("HumanoidRootPart") and 
-                        v.Character:FindFirstChild("Humanoid") and 
-                        v.Character:FindFirstChild("Humanoid").Health ~= 0 then
-                            if settings_tbl.ESP_TeamCheck == false then
-                                local char = v.Character 
-                                for k,b in next, char:GetChildren() do 
-                                    if b:IsA("BasePart") and 
-                                    b.Transparency ~= 1 then
-                                        if settings_tbl.Chams then
-                                            if not b:FindFirstChild("Glow") and
-                                            not b:FindFirstChild("Chams") then
-                                                local chams_box = Instance.new("BoxHandleAdornment", b)
-                                                chams_box.Name = "Chams"
-                                                chams_box.AlwaysOnTop = true 
-                                                chams_box.ZIndex = 4 
-                                                chams_box.Adornee = b 
-                                                chams_box.Color3 = settings_tbl.Chams_Color
-                                                chams_box.Transparency = settings_tbl.Chams_Transparency
-                                                chams_box.Size = b.Size + Vector3.new(0.02, 0.02, 0.02)
-                                                local glow_box = Instance.new("BoxHandleAdornment", b)
-                                                glow_box.Name = "Glow"
-                                                glow_box.AlwaysOnTop = false 
-                                                glow_box.ZIndex = 3 
-                                                glow_box.Adornee = b 
-                                                glow_box.Color3 = settings_tbl.Chams_Glow_Color
-                                                glow_box.Size = chams_box.Size + Vector3.new(0.13, 0.13, 0.13)
-                                            end
-                                        else
-                                            destroy_chams(char)
-                                        end
-                                    end
-                                end
-                            else
-                                if v.Team == dwLocalPlayer.Team then
-                                    destroy_chams(v.Character)
-                                end
-                            end
-                        else
-                            destroy_chams(v.Character)
-                        end
-                    end
-                end
-            else 
-                for k,v in next, dwEntities:GetPlayers() do 
-                    if v ~= dwLocalPlayer and 
-                    v.Character and 
-                    v.Character:FindFirstChild("HumanoidRootPart") and 
-                    v.Character:FindFirstChild("Humanoid") and 
-                    v.Character:FindFirstChild("Humanoid").Health ~= 0 then
-                        destroy_chams(v.Character)
-                    end
-                end
-            end
-        end)
-	end,
-})
-
 local Button = T2:CreateButton({
 	Name = "Inf Jump",
 	Callback = function()
@@ -462,7 +734,6 @@ local Button = T2:CreateButton({
         end)
 	end,
 })
-
 
 local Button = T2:CreateButton({
 	Name = "T to teleport",
