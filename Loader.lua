@@ -7,7 +7,6 @@ if getgenv().Network then
 end
 
 getgenv().Network = true
-
 getgenv().supported = true
 getgenv().Check1 = true
 
@@ -32,6 +31,7 @@ local Window = Rayfield:CreateWindow({
         Key = "test"
     }
 })
+
 local T1 = Window:CreateTab("Function Checker")
 
 if Check1 == true then
