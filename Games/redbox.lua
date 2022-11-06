@@ -5,18 +5,30 @@ local players = game.Players:GetPlayers()
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
 local Window = Rayfield:CreateWindow({
-    Name = "Redbox",
-    LoadingTitle = "Hydra network",
-    LoadingSubtitle = "by hydra#8270",
-    KeySystem = false,
-    KeySettings = {
-        Title = "Sirius Hub",
-        Subtitle = "Key System",
-        Note = "Join the discord (discord.gg/sirius)",
-        Key = "ABCDEF"
-    }
+	Name = "Redbox",
+	LoadingTitle = "Hydra Network",
+	LoadingSubtitle = "by hydra#8270",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil,
+		FileName = "Big Hub"
+	},
+        Discord = {
+        	Enabled = true,
+        	Invite = "YvwEyH2W6t",
+        	RememberJoins = true 
+        },
+	KeySystem = false,
+	KeySettings = {
+		Title = "Hydra Network",
+		Subtitle = "Key System",
+		Note = "Key link copied in clipboard!",
+		FileName = "SiriusKey",
+		SaveKey = false,
+		GrabKeyFromSite = true,
+		Key = "https://pastebin.com/raw/KcaMdP0i"
+	}
 })
-
 getgenv().Color = BrickColor
 getgenv().HeadSize = 1
 getgenv().Rootpart = 2
