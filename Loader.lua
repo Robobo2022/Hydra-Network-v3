@@ -16,29 +16,12 @@ else
     Check1 = false
 end
 
-setclipboard("test")
 
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
-local Window = Rayfield:CreateWindow({
-    Name = "Key System Succes!",
-    LoadingTitle = "Hydra network",
-    LoadingSubtitle = "by hydra#8270",
-    KeySystem = true,
-    KeySettings = {
-        Title = "Hydra Network",
-        Subtitle = "Key System",
-        Note = "Key Copied in clipboard",
-        Key = "test"
-    }
-})
-
-local T1 = Window:CreateTab("Function Checker")
 
 if Check1 == true then
-    local Paragraph = T1:CreateParagraph({Title = "require", Content = "Supported"})
     supported = true
 else
-    local Paragraph = T1:CreateParagraph({Title = "require", Content = "Unsupported"})
     supported = false
 end
 
