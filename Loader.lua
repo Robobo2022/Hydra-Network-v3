@@ -51,7 +51,6 @@ if supported == true then
     })[game.PlaceId]
     
     if games then
-        Rayfield:Destroy()
         loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Robobo2022/Hydra-Network-V3/main/Games/" .. games))()
     else
         game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -78,7 +77,6 @@ if supported == false then
     })[game.PlaceId]
     
     if gamez then
-        Rayfield:Destroy()
         loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Robobo2022/Hydra-Network-V3/main/Games/" .. gamez))()
     else
         game:GetService("StarterGui"):SetCore("SendNotification", {
