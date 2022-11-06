@@ -52,20 +52,29 @@ task.spawn(function()
 end)
 
 local Window = Rayfield:CreateWindow({
-    Name = "Tapping simulator",
-    LoadingTitle = "Hydra network",
-    LoadingSubtitle = "by hydra#8270",
-    ConfigurationSaving = {
-        Enabled = true,
-        FileName = "Big Hub",
-    },
-    KeySystem = false,
-    KeySettings = {
-        Title = "Sirius Hub",
-        Subtitle = "Key System",
-        Note = "Join the discord (discord.gg/sirius)",
-        Key = "ABCDEF"
-    }
+	Name = "Tapping simulator",
+	LoadingTitle = "Hydra Network",
+	LoadingSubtitle = "by hydra#8270",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil,
+		FileName = "Big Hub"
+	},
+        Discord = {
+        	Enabled = true,
+        	Invite = "YvwEyH2W6t",
+        	RememberJoins = true 
+        },
+	KeySystem = false,
+	KeySettings = {
+		Title = "Hydra Network",
+		Subtitle = "Key System",
+		Note = "Key link copied in clipboard!",
+		FileName = "SiriusKey",
+		SaveKey = false,
+		GrabKeyFromSite = true,
+		Key = "https://pastebin.com/raw/KcaMdP0i"
+	}
 })
 
 local T1 = Window:CreateTab("Auto")
