@@ -51,7 +51,8 @@ if supported == true then
     })[game.PlaceId]
     
     if games then
-        loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Robobo2022/Hydra-Network-V3/main/Games/" .. games))()
+        loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Robobo2022/Script-hub/tree/main/Non%20Simulator/" .. games))()
+        
     else
         game:GetService("StarterGui"):SetCore("SendNotification", {
             Title = "Hydra Network",
