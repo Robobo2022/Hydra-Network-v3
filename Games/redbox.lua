@@ -1,7 +1,5 @@
-local StarterPlayer = game:GetService("StarterPlayer")
-local Workspace = game:GetService("Workspace")
+local localname = game:GetService("Players").LocalPlayer.Name
 local Light = game:GetService("Lighting")
-local players = game.Players:GetPlayers()
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
 local Window = Rayfield:CreateWindow({
@@ -123,6 +121,13 @@ local Button = T2:CreateButton({
         game.Lighting.FogStart = 0
         game.Lighting.Brightness = 5
         game.Lighting.GlobalShadows = false
+	end,
+})
+
+local Button = T2:CreateButton({
+	Name = "unarrest",
+	Callback = function()
+        game:GetService("Workspace").Characters[localname].Arrested.Value = false
 	end,
 })
 
